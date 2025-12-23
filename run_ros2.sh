@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 CONTAINER_NAME=intro-ros2
-IMAGE_NAME=intro-ros2:humble
+IMAGE_NAME=ghcr.io/fabio-amadio/intro-ros2:2026
 COLCON_WS=/root/ros2_ws
 
 isRunning=$(docker ps -f name=${CONTAINER_NAME} | grep -c ${CONTAINER_NAME})
