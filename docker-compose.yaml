@@ -1,0 +1,28 @@
+services:
+  intro-ros2:
+    container_name: intro-ros2
+    image: intro-ros2:humble
+    build:
+      context: .
+      dockerfile: Dockerfile
+    tty: true
+    network_mode: host
+    ipc: host
+    environment:
+      - DISPLAY=${DISPLAY}
+      - QT_X11_NO_MITSHM=1
+    volumes:
+      # X11 for Gazebo GUI
+      - /tmp/.X11-unix:/tmp/.X11-unix:rw
+      - /tmp/.docker.xauth:/tmp/.docker.xauth:rw
+
+      # Shared memory (Gazebo can benefit)
+      - /dev/shm:/dev/shm
+
+      # Your local packages
+      - .:/root/ros2_ws/src/
+    devices:
+      - /dev/dri:/dev/dri
+    group_add:
+      - video
+    command: /bin/bash
